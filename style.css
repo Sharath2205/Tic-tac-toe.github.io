@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #196a68;
+}
+
+.container {
+    /* background: #488c90; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .title {
+    letter-spacing: 5px;
+    color: #fff;
+    padding: 1rem 2rem 0.5rem 2rem;
+    width: auto;
+    text-align: center;
+    border-bottom: 2px dashed #ffff92;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.score-card {
+    padding: 1rem;
+    color: white;
+    font-size: 4rem;
+    text-align: center;
+}
+
+.score-card p {
+    font-size: 1rem;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffff9d;
+    color: white;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+    border-bottom: none;
+}
+
+.cell:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before,
+.cell.circle::after {
+    background-color: #fff;
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    background-color: rgb(166, 166, 166);
+}
+
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    width: calc(var(--mark-size) * 0.15);
+    height: var(--mark-size);
+    position: absolute;
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    width: calc(var(--mark-size) * 0.95);
+    height: calc(var(--mark-size) * 0.95);
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    width: calc(var(--mark-size) * 0.65);
+    height: calc(var(--mark-size) * 0.65);
+    background-color: #196a68;
+}
+
+
+
+.cell.circle,
+.cell.x {
+    cursor: not-allowed
+}
+
+/* Buttons styling */
+
+.buttons {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.7rem;
+    width: 300px;
+}
+
+.button {
+    padding: 1rem;
+    background-color: #083234;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.reset-game {
+    margin-bottom: 0.5rem;
+}
+
+.button span {
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: "\00bb";
+    position: absolute;
+    right: -15px;
+    top: 0;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 20px
+}
+
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
